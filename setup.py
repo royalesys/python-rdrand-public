@@ -1,5 +1,5 @@
-from distutils.core import setup
-from distutils.extension import Extension
+from setuptools import setup, find_packages
+from setuptools.extension import Extension
 
 sources = [
     'src/common.c',
@@ -11,7 +11,9 @@ extra_args = [
     '-mrdrnd'
 ]
 
-module = Extension('_rdrand', sources=sources)
+module = Extension('_rdrand',
+                   sources=sources,
+                   extra_compile_args=extra_args)
 
 setup(
     name="rdrand",
@@ -19,6 +21,6 @@ setup(
     description="Intel® - Digital Random Number Generator (DRNG) [Bull Mountain] interface for Python.",
     author="Murilo Augusto",
     ext_modules=[module],
-    extra_compile_args=extra_args,
-    packages=['rdrand'],
+    packages=find_packages(),
 )
+
